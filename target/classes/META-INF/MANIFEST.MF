@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: calendar
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: 3447SINFO - 3447
+Implementation-Vendor-Id: com
+Build-Jdk: 1.8.0_191
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/calendar
+Created-By: Maven Integration for Eclipse
+
