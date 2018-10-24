@@ -4,6 +4,7 @@ import com.calendar.utils.CalendarUtils;
 import com.calendar.utils.JSONProcessor;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -47,8 +48,38 @@ public class Calendario{
      * @return
      */
     public static Calendario criaCalendarioMensal(int mes, int ano){
+    	validarMes(mes);
+    	validarAno(ano);
+    	
         return new Calendario(mes,ano);
     }
+    
+    /**
+     * Método para realizar a validação do mês antes de criar o calendário.
+     *
+     * @param mes
+     */
+    public static void validarMes(int mes) {
+        if (mes > Calendar.DECEMBER) {
+            throw new IllegalArgumentException("O mÃªs deve ser menor que DEZEMBRO (11 na api calendar).");
+        }
+
+        if (mes < Calendar.JANUARY) {
+            throw new IllegalArgumentException("O mÃªs deve ser maior que JANEIRO (0 na api calendar");
+        }
+    }
+
+    /**
+     * Método para validar o ano antes de criar o calendário.
+     *
+     * @param ano
+     */
+    public static void validarAno(int ano) {
+        if (ano < 1970) {
+            throw new IllegalArgumentException("O ano deve ser maior que 1970");
+        }
+    }
+
 
     /**
      * Cria um evento com o título e data passados por parâmetro.
