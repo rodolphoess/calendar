@@ -5,15 +5,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.calendar.domain.Calendario;
-
 import com.calendar.domain.Evento;
+import com.calendar.domain.Calendario;
 import com.calendar.utils.CalendarUtils;
 
 /**
 * Classe que implementa um adapter para visualização de um calendario.
 * 
-* @see com.calendar.domain.Calendario
+* @see com.calendar.domain.CalendarioImpl
 * 
 * @author Daniel Smith
 */

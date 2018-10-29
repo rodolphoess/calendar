@@ -1,6 +1,6 @@
 package com.calendar.service;
 
-import com.calendar.domain.Calendario;
+import com.calendar.domain.CalendarioImpl;
 import com.calendar.repository.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class CalendarService {
 
     }
 
-    public List<Calendario> listarCalendarios(){
+    public List<CalendarioImpl> listarCalendarios(){
         return null;
     }
 
