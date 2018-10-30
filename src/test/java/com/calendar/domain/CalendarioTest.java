@@ -61,8 +61,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "01/01/1970";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -73,8 +73,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "31/12/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -85,8 +85,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "30/02/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -97,8 +97,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "31/06/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -109,8 +109,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "00/12/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -121,8 +121,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "32/12/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -133,8 +133,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "01/13/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -145,8 +145,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "31/00/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -157,8 +157,8 @@ public class CalendarioTest {
 
 		Date data = null;
 		String dataString = "15/06/1969";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 
 		calendario.getEventosByDia(data);
 	}
@@ -169,8 +169,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "01/01/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("a", data, "a");
 	}
@@ -181,8 +181,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "31/12/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwertyuiopasdfghjklç", data, "qwertyuiop");
 	}
@@ -193,8 +193,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "01/06/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento(null, data, "qwert");
 	}
@@ -205,8 +205,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "30/06/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwertyuiopasdfghjklçz", data, "a");
 	}
@@ -217,8 +217,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "15/04/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwertyuiop", data, null);
 	}
@@ -229,8 +229,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "09/10/2020";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qw", data, "qwertyuiopa");
 	}
@@ -241,8 +241,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "30/02/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwertyui", data, "qwertyu");
 	}
@@ -253,8 +253,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "31/06/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwertyuiopasdfg", data, "qwer");
 	}
@@ -265,8 +265,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "00/12/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwertyuiopas", data, "as");
 	}
@@ -277,8 +277,8 @@ public class CalendarioTest {
 		
 		Date data = null;
 		String dataString = "32/12/2018";
-		DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-		data = dateFormatter.parse(dataString);
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
 		
 		calendario.adicionarEvento("qwer", data, "qwe");
 	}
