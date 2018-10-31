@@ -227,4 +227,45 @@ public class CalendarUtils {
 
         return calendar.get(Calendar.WEEK_OF_YEAR);
     }
+
+    /**
+     * Método responsável por validar se a data pertence ao mês.
+     *
+     *
+     *
+     * @param data
+     * @param mes
+     *
+     * @return
+     */
+    public static boolean dataPertenceAoMes(Date data, int mes, int ano) {
+        //Dias inválidos do mês ex: dias menores do que 1 ou maiores do que 30 ou 31 depdendendo do mes
+        if (getAnoByData(data) != ano) {
+            return false;
+        }
+
+        ValidadorMes validadorMes = getValidadorMes(mes, ano);
+
+        return validadorMes.dataPertenceAoMes(data);
+    }
+
+    private static int getAnoByData(Date data) {
+        Calendar calendario = Calendar.getInstance();
+        calendario.setTime(data);
+
+        return calendario.get(Calendar.YEAR);
+    }
+
+    public static ValidadorMes getValidadorMes(int mes, int ano){
+        ValidadorMes validadorMes = null;
+
+        if(mes == Calendar.FEBRUARY){
+            validadorMes = new ValidadorMesFevereiro(mes,ano);
+        }else{
+            validadorMes = new ValidadorMesPadrao(mes);
+        }
+
+        return validadorMes;
+    }
+
 }

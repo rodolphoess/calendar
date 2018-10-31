@@ -287,7 +287,7 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyui", data, "qwertyu");
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_dia_invalido_mes_trinta_dias() throws ParseException {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 2018);
 

@@ -79,7 +79,14 @@ public class CalendarioImpl implements Calendario {
 	 */
     @Override
 	public void adicionarEvento(String titulo, Date dataEvento, String link) {
-        adicionarEvento(Evento.criarEvento(titulo, dataEvento, link));
+
+        if(!CalendarUtils.dataPertenceAoMes(dataEvento, this.mes,this.ano)){
+            throw new IllegalArgumentException("A data informada não pertence ao mês do calendário ");
+        }
+
+        Evento evento = Evento.criarEvento(titulo, dataEvento, link);
+
+        adicionarEvento(evento);
     }
 
     private void adicionarEvento(Evento evento) {
