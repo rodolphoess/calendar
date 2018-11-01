@@ -477,6 +477,10 @@ public class CalendarioTest {
 	
 	@Test
 	public void testGetJson_valido() {
+		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.NOVEMBER, 2018);
 		
+		String JSON = calendario.getJson();
+		
+		assertEquals(calendario.getJson(), JSON);
 	}
 }
