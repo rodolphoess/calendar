@@ -369,49 +369,49 @@ public class CalendarioTest {
 	}
 
 	@Test
-	public void testBuscarMes_valido_limite_inferior() throws ParseException {
+	public void testBuscarMes_valido_limite_inferior() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
 		assertEquals(calendario.getMes(), Calendar.JANUARY);
 	}
 
 	@Test
-	public void testBuscarMes_valido_limite_superior() throws ParseException {
+	public void testBuscarMes_valido_limite_superior() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 		assertEquals(calendario.getMes(), Calendar.DECEMBER);
 	}
 
 	@Test
-	public void testBuscarMes_invalido_abaixo_limite_inferior() throws ParseException {
+	public void testBuscarMes_invalido_abaixo_limite_inferior() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(-10, 2018);
 		assertEquals(calendario.getMes(), -10);
 	}
 
 	@Test
-	public void testBuscarMes_invalido_acima_limite_superior() throws ParseException {
+	public void testBuscarMes_invalido_acima_limite_superior() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(20, 2018);
 		assertEquals(calendario.getMes(), 20);
 	}
 
 	@Test
-	public void testBuscarAno_valido_limite_inferior() throws ParseException {
+	public void testBuscarAno_valido_limite_inferior() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 1970);
 		assertEquals(calendario.getAno(), 1970);
 	}
 
 	@Test
-	public void testBuscarAno_valido_atual() throws ParseException {
+	public void testBuscarAno_valido_atual() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
 		assertEquals(calendario.getAno(), 2018);
 	}
 
 	@Test
-	public void testBuscarAno_invalido_abaixo_limite_inferior() throws ParseException {
+	public void testBuscarAno_invalido_abaixo_limite_inferior() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 1969);
 		assertEquals(calendario.getAno(), 1969);
 	}
 
 	@Test
-	public void testBuscarAno_invalido_ano_negativo() throws ParseException {
+	public void testBuscarAno_invalido_ano_negativo() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, -2018);
 		assertEquals(calendario.getAno(), -2018);
 	}
@@ -469,9 +469,14 @@ public class CalendarioTest {
 	}
 
 	@Test
-	public void testGetEventos_valido_nenhum_evento() throws ParseException {
+	public void testGetEventos_valido_nenhum_evento() {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.MAY, 2018);
 		
 		assertEquals(calendario.getEventos(), eventosAdicionadosSet);
+	}
+	
+	@Test
+	public void testGetJson_valido() {
+		
 	}
 }
