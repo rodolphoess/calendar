@@ -1,68 +1,79 @@
 package com.calendar.domain;
 
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static org.junit.Assert.assertArrayEquals;
+import com.calendar.domain.factory.CalendarioFactory;
+import com.calendar.domain.factory.CalendarioImpl2Factory;
+import com.calendar.domain.factory.CalendarioImplFactory;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(JUnit4.class)
 public class CalendarioTest {
 
+	private CalendarioFactory calendarioFactory;
+
+	@Before
+	public void setup() {
+		this.calendarioFactory = new CalendarioImplFactory();
+	}
+
 	@Test
 	public void testCriarCalendario_mes_entre_janeiro_e_dezembro_ano_maior_que_1970() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2050);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2050);
+		assertNotNull(calendario);
 	}
 
 	@Test
 	public void testCriarCalendario_mes_igual_a_dezembro_e_ano_valido() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 1971);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 1971);
+		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_maior_que_dezembro_ano_invalido() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(12, 1970);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(12, 1970);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_entre_janeiro_e_dezembro_ano_invalido() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JULY, 1969);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JULY, 1969);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_menor_que_janeiro_ano_valido() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(-1, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(-1, 2018);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_entre_janeiro_dezembro_ano_negativo() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, -2000);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, -2000);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_negativo_ano_valido() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(-150, 2000);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(-150, 2000);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_maior_dezembro_ano_valido() {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(200, 2100);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(200, 2100);
 	}
 
 	@Test
 	public void testGetEventosByDia_dia_valido_mes_valido_ano_valido_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 1970);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 1970);
 
 		Date data = null;
 		String dataString = "01/01/1970";
@@ -78,7 +89,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testGetEventosByDia_dia_valido_mes_valido_ano_valido_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "31/12/2018";
@@ -94,7 +105,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testGetEventosByDia_invalido_dia_inexistente_em_fevereiro() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.FEBRUARY, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.FEBRUARY, 2018);
 
 		Date data = null;
 		String dataString = "30/02/2018";
@@ -108,9 +119,9 @@ public class CalendarioTest {
 		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_dia_inexistente_em_meses_trinta_dias() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
 
 		Date data = null;
 		String dataString = "31/06/2018";
@@ -124,9 +135,9 @@ public class CalendarioTest {
 		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_dia_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "00/12/2018";
@@ -140,9 +151,9 @@ public class CalendarioTest {
 		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
 	}
 
-	@Test @Ignore
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_dia_acima_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "32/12/2018";
@@ -156,9 +167,9 @@ public class CalendarioTest {
 		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
 	}
 
-	@Test @Ignore
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_mes_acima_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "01/13/2018";
@@ -172,9 +183,9 @@ public class CalendarioTest {
 		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
 	}
 
-	@Test @Ignore
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_mes_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2018);
 
 		Date data = null;
 		String dataString = "31/00/2018";
@@ -190,7 +201,7 @@ public class CalendarioTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_ano_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 1969);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 1969);
 
 		Date data = null;
 		String dataString = "15/06/1969";
@@ -206,7 +217,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_valido_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2018);
 
 		Date data = null;
 		String dataString = "01/01/2018";
@@ -218,7 +229,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_valido_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "31/12/2018";
@@ -230,7 +241,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_invalido_titulo_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
 
 		Date data = null;
 		String dataString = "01/06/2018";
@@ -242,7 +253,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_invalido_titulo_acima_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
 
 		Date data = null;
 		String dataString = "30/06/2018";
@@ -254,7 +265,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_invalido_link_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.APRIL, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.APRIL, 2018);
 
 		Date data = null;
 		String dataString = "15/04/2018";
@@ -266,7 +277,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_invalido_link_acima_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.OCTOBER, 2020);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.OCTOBER, 2020);
 
 		Date data = null;
 		String dataString = "09/10/2020";
@@ -278,7 +289,7 @@ public class CalendarioTest {
 
 	@Test
 	public void testAdicionarEvento_invalido_dia_fevereiro_invalido() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.FEBRUARY, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.FEBRUARY, 2018);
 
 		Date data = null;
 		String dataString = "30/02/2018";
@@ -290,7 +301,7 @@ public class CalendarioTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_dia_invalido_mes_trinta_dias() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
 
 		Date data = null;
 		String dataString = "31/06/2018";
@@ -300,9 +311,9 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyuiopasdfg", data, "qwer");
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_dia_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "00/12/2018";
@@ -312,9 +323,9 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyuiopas", data, "as");
 	}
 
-	@Test @Ignore
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_dia_acima_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "32/12/2018";
@@ -324,9 +335,9 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwer", data, "qwe");
 	}
 
-	@Test @Ignore
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_mes_acima_limite_superior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 
 		Date data = null;
 		String dataString = "01/13/2018";
@@ -336,9 +347,9 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyuiopa", data, "qwertyui");
 	}
 
-	@Test @Ignore
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_mes_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2018);
 
 		Date data = null;
 		String dataString = "31/00/2018";
@@ -350,7 +361,7 @@ public class CalendarioTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_ano_abaixo_limite_inferior() throws ParseException {
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JUNE, 1969);
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 1969);
 
 		Date data = null;
 		String dataString = "15/06/1969";
@@ -359,45 +370,52 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwertyuio", data, "qwertyuio");
 	}
+
 	@Test
-	public void testBuscarMes_valido_limite_inferior() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
+	public void testBuscarMes_valido_limite_inferior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2018);
 		assertEquals(calendario.getMes(), Calendar.JANUARY);
 	}
+
 	@Test
-	public void testBuscarMes_valido_limite_superior() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER,2018);
+	public void testBuscarMes_valido_limite_superior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
 		assertEquals(calendario.getMes(), Calendar.DECEMBER);
 	}
-	@Test (expected = IllegalArgumentException.class)
-	public void testBuscarMes_invalido_abaixo_limite_inferior() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(-10, 2018);
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testBuscarMes_invalido_abaixo_limite_inferior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(-10, 2018);
 		assertEquals(calendario.getMes(), -10);
 	}
-	@Test (expected = IllegalArgumentException.class)
-	public void testBuscarMes_invalido_acima_limite_superior() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(20, 2018);
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testBuscarMes_invalido_acima_limite_superior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(20, 2018);
 		assertEquals(calendario.getMes(), 20);
 	}
+
 	@Test
-	public void testBuscarAno_valido_limite_inferior() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 1970);
-		assertEquals(calendario.getAno(),1970);
+	public void testBuscarAno_valido_limite_inferior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 1970);
+		assertEquals(calendario.getAno(), 1970);
 	}
+
 	@Test
-	public void testBuscarAno_valido_atual() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
-		assertEquals(calendario.getAno(),2018);
+	public void testBuscarAno_valido_atual() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2018);
+		assertEquals(calendario.getAno(), 2018);
 	}
-	@Test (expected = IllegalArgumentException.class)
-	public void testBuscarAno_invalido_abaixo_limite_inferior() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 1969);
-		assertEquals(calendario.getAno(),1969);
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testBuscarAno_invalido_abaixo_limite_inferior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 1969);
+		assertEquals(calendario.getAno(), 1969);
 	}
-	@Test (expected = IllegalArgumentException.class)
-	public void testBuscarAno_invalido_ano_negativo() throws ParseException{
-		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, -2018);
-		assertEquals(calendario.getAno(),-2018);
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testBuscarAno_invalido_ano_negativo() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, -2018);
+		assertEquals(calendario.getAno(), -2018);
 	}
 }
-

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.calendar.utils.JsonException;
+
 public interface Calendario {
 
 	/**
@@ -28,6 +30,6 @@ public interface Calendario {
 
 	int getAno();
 
-	String getJson();
+	String getJson() throws JsonException;
 
 }

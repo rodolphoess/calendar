@@ -2,6 +2,7 @@ package com.calendar.domain;
 
 import com.calendar.utils.CalendarUtils;
 import com.calendar.utils.JSONProcessor;
+import com.calendar.utils.JsonException;
 
 import java.util.*;
 
@@ -178,7 +179,7 @@ public class CalendarioImpl implements Calendario {
 	 * @see com.calendar.domain.ICalendar#getJson()
 	 */
     @Override
-	public String getJson() {
+	public String getJson() throws JsonException{
         return JSONProcessor.toJSON(this);
     }
 

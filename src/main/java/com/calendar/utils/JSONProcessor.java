@@ -7,16 +7,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONProcessor {
 
-	public synchronized static <T> T toObject(String jsonText, Class<T> clazz) {
+	public synchronized static <T> T toObject(String jsonText, Class<T> clazz) throws JsonException {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(jsonText, clazz);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new JsonException(e);
         }
     }
 
-	public synchronized static String toJSON(Object object) {
+	public synchronized static String toJSON(Object object) throws JsonException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
