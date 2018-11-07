@@ -98,7 +98,23 @@ public class CalendarioImpl implements Calendario {
         eventos.add(evento);
 
     }
-
+    public void  criarCalendarioMensal (int mes, int ano) {
+    	if (ano<0) {
+    		throw new IllegalArgumentException("O ano não pode ser negatívo");
+    	}
+    	if (ano<1970) {
+    		throw new IllegalArgumentException("O calendario começa em 1970");
+    	}
+    	if (mes>12) {
+    		throw new IllegalArgumentException("O mês informado não existe");
+    	}
+    	if (mes<0) {
+    		throw new IllegalArgumentException("Meses negativos não existem");
+    	}
+    	
+    }
+    
+    
     /**
      * Retorna os eventos do período informado.
      *

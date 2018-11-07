@@ -369,12 +369,12 @@ public class CalendarioTest {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.DECEMBER,2018);
 		assertEquals(calendario.getMes(), Calendar.DECEMBER);
 	}
-	@Test @Ignore
+	@Test (expected = IllegalArgumentException.class)
 	public void testBuscarMes_invalido_abaixo_limite_inferior() throws ParseException{
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(-10, 2018);
 		assertEquals(calendario.getMes(), -10);
 	}
-	@Test @Ignore
+	@Test (expected = IllegalArgumentException.class)
 	public void testBuscarMes_invalido_acima_limite_superior() throws ParseException{
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(20, 2018);
 		assertEquals(calendario.getMes(), 20);
@@ -389,12 +389,12 @@ public class CalendarioTest {
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 2018);
 		assertEquals(calendario.getAno(),2018);
 	}
-	@Test @Ignore
+	@Test (expected = IllegalArgumentException.class)
 	public void testBuscarAno_invalido_abaixo_limite_inferior() throws ParseException{
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, 1969);
 		assertEquals(calendario.getAno(),1969);
 	}
-	@Test @Ignore
+	@Test (expected = IllegalArgumentException.class)
 	public void testBuscarAno_invalido_ano_negativo() throws ParseException{
 		Calendario calendario = CalendarioImpl.criaCalendarioMensal(Calendar.JANUARY, -2018);
 		assertEquals(calendario.getAno(),-2018);
