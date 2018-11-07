@@ -32,43 +32,57 @@ public class CalendarioTest {
 	@Test
 	public void testCriarCalendario_mes_entre_janeiro_e_dezembro_ano_maior_que_1970() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2050);
+		
 		assertNotNull(calendario);
 	}
 
 	@Test
 	public void testCriarCalendario_mes_igual_a_dezembro_e_ano_valido() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 1971);
+		
 		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_maior_que_dezembro_ano_invalido() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(12, 1970);
+		
+		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_entre_janeiro_e_dezembro_ano_invalido() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JULY, 1969);
+		
+		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_menor_que_janeiro_ano_valido() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(-1, 2018);
+		
+		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_entre_janeiro_dezembro_ano_negativo() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, -2000);
+		
+		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_negativo_ano_valido() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(-150, 2000);
+		
+		assertNotNull(calendario);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCriarCalendario_mes_maior_dezembro_ano_valido() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(200, 2100);
+		
+		assertNotNull(calendario);
 	}
 
 	@Test
