@@ -26,7 +26,7 @@ public class CalendarioTest {
 
 	@Before
 	public void setup() {
-		this.calendarioFactory = new CalendarioImplFactory();
+		this.calendarioFactory = new CalendarioImpl2Factory();
 	}
 
 	@Test
