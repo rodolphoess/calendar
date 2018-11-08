@@ -7,7 +7,7 @@ import org.junit.runners.JUnit4;
 
 import com.calendar.domain.factory.CalendarioFactory;
 import com.calendar.domain.factory.CalendarioImpl2Factory;
-import com.calendar.domain.factory.CalendarioImplFactory;
+import com.calendar.utils.JsonException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,18 +15,25 @@ import static org.junit.Assert.assertNotNull;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(JUnit4.class)
 public class CalendarioTest {
 
 	private CalendarioFactory calendarioFactory;
+	private List<Evento> eventosAdicionadosList;
+	private Set<Evento> eventosAdicionadosSet;
 
 	@Before
 	public void setup() {
 		this.calendarioFactory = new CalendarioImpl2Factory();
+		this.eventosAdicionadosList = new ArrayList<Evento>();
+		this.eventosAdicionadosSet = new HashSet<Evento>();
 	}
 
 	@Test
@@ -96,9 +103,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test
@@ -112,12 +119,12 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetEventosByDia_invalido_dia_inexistente_em_fevereiro() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.FEBRUARY, 2018);
 
@@ -128,9 +135,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -144,9 +151,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -160,9 +167,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -176,9 +183,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -192,9 +199,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -208,9 +215,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -224,9 +231,9 @@ public class CalendarioTest {
 
 		calendario.adicionarEvento("qwert", data, "asdfg");
 
-		List<Evento> eventoAdicionado = calendario.getEventosByDia(data);
+		eventosAdicionadosList = calendario.getEventosByDia(data);
 
-		assertEquals(calendario.getEventosByDia(data), eventoAdicionado);
+		assertEquals(calendario.getEventosByDia(data), eventosAdicionadosList);
 	}
 
 	@Test
@@ -253,7 +260,7 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyuiopasdfghjklç", data, "qwertyuiop");
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void testAdicionarEvento_invalido_titulo_abaixo_limite_inferior() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
 
@@ -265,7 +272,7 @@ public class CalendarioTest {
 		calendario.adicionarEvento(null, data, "qwert");
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_titulo_acima_limite_superior() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
 
@@ -277,7 +284,7 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyuiopasdfghjklçz", data, "a");
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void testAdicionarEvento_invalido_link_abaixo_limite_inferior() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.APRIL, 2018);
 
@@ -289,7 +296,7 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qwertyuiop", data, null);
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_link_acima_limite_superior() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.OCTOBER, 2020);
 
@@ -301,7 +308,7 @@ public class CalendarioTest {
 		calendario.adicionarEvento("qw", data, "qwertyuiopa");
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarEvento_invalido_dia_fevereiro_invalido() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.FEBRUARY, 2018);
 
@@ -431,5 +438,73 @@ public class CalendarioTest {
 	public void testBuscarAno_invalido_ano_negativo() throws ParseException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, -2018);
 		assertEquals(calendario.getAno(), -2018);
+	}
+	
+	@Test
+	public void testGetEventos_valido_limite_inferior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JANUARY, 2018);
+
+		Date data = null;
+		String dataString = "01/01/2018";
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
+
+		calendario.adicionarEvento("a", data, "a");
+
+		eventosAdicionadosSet = calendario.getEventos();
+
+		assertEquals(calendario.getEventos(), eventosAdicionadosSet);
+	}
+
+	@Test
+	public void testGetEventos_valido_limite_superior() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.DECEMBER, 2018);
+
+		Date data = null;
+		String dataString = "31/12/2018";
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		data = dataFormatada.parse(dataString);
+
+		calendario.adicionarEvento("qwertyuiopasdfghjklç", data, "qwertyuiop");
+
+		eventosAdicionadosSet = calendario.getEventos();
+
+		assertEquals(calendario.getEventos(), eventosAdicionadosSet);
+	}
+
+	@Test
+	public void testGetEventos_valido_mais_de_um_evento() throws ParseException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.JUNE, 2018);
+
+		Date dataEventoUm = null;
+		Date dataEventoDois = null;
+		String dataStringEventoUm = "01/06/2018";
+		String dataStringEventoDois = "30/06/2018";
+		DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+		dataEventoUm = dataFormatada.parse(dataStringEventoUm);
+		dataEventoDois = dataFormatada.parse(dataStringEventoDois);
+
+		calendario.adicionarEvento("qwertyui", dataEventoUm, "qwerty");
+		calendario.adicionarEvento("qwer", dataEventoDois, "qwertyui");
+
+		eventosAdicionadosSet = calendario.getEventos();
+
+		assertEquals(calendario.getEventos(), eventosAdicionadosSet);
+	}
+
+	@Test
+	public void testGetEventos_valido_nenhum_evento() {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.MAY, 2018);
+		
+		assertEquals(calendario.getEventos(), eventosAdicionadosSet);
+	}
+	
+	@Test
+	public void testGetJson_valido() throws JsonException {
+		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.NOVEMBER, 2018);
+		
+		String JSON = calendario.getJson();
+		
+		assertEquals(calendario.getJson(), JSON);
 	}
 }

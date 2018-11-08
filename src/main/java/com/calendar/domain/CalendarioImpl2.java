@@ -63,11 +63,6 @@ public class CalendarioImpl2 implements Calendario {
 		return eventosDoDia;
 	}
 
-	public void instanciaCalendar(Date data) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(data);
-	}
-
 	@Override
 	public Set<Evento> getEventos() {
 		// TODO Auto-generated method stub

@@ -1,6 +1,9 @@
 package com.calendar.domain;
 
+import java.util.Calendar;
 import java.util.Date;
+
+import com.calendar.utils.CalendarUtils;
 
 /**
  * Classe que representa um evento de um calendário.
@@ -41,8 +44,52 @@ public class Evento{
      * @return
      */
     public static Evento criarEvento(String titulo, Date data, String link){
+    	validarTitulo(titulo);
+    	validarData(data);
+    	validarLink(link);
+    	
         return new Evento(titulo,data,link);
     }
+
+	private static void validarLink(String link) {
+		if (link == null || link.isEmpty())
+			throw new NullPointerException("Link inválido por estar vazio.");
+		
+		if (link.length() > 10)
+			throw new IllegalArgumentException("Link inválido por exceder o tamanho máximo de 10 caracteres.");
+	}
+
+	private static void validarData(Date data) {
+		Calendar calendar = instanciaCalendar(data);
+		
+		int dia = CalendarUtils.getDiaByData(data);
+		int mes = CalendarUtils.getMesByData(data);
+		int ano = calendar.get(Calendar.YEAR);
+		
+		if (dia < 1)
+			throw new IllegalArgumentException("O dia informado é inválido por ser menor do que 01.");
+		
+		if (mes < 0 || mes > 11)
+			throw new IllegalArgumentException("O mês informado é inválido por ser maior do que 12 ou menor do que 01.");
+		
+		if (ano < 1970)
+			throw new IllegalArgumentException("O ano informado é inválido por ser menor do que 1970.");
+	}
+	
+	public static Calendar instanciaCalendar(Date data) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(data);
+		
+		return calendar;
+	}
+
+	private static void validarTitulo(String titulo) {
+		if (titulo == null || titulo.isEmpty())
+			throw new NullPointerException("Título inválido por estar vazio.");
+		
+		if (titulo.length() > 20)
+			throw new IllegalArgumentException("Título inválido por exceder o tamanho máximo de 20 caracteres.");
+	}
 
 	public String getTitulo() {
 		return titulo;
