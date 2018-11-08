@@ -11,6 +11,7 @@ import com.calendar.utils.JsonException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -496,7 +497,7 @@ public class CalendarioTest {
 	public void testGetEventos_valido_nenhum_evento() {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.MAY, 2018);
 		
-		assertEquals(calendario.getEventos(), eventosAdicionadosSet);
+		assertNull(calendario.getEventos());
 	}
 	
 	@Test

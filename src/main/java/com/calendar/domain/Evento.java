@@ -69,7 +69,7 @@ public class Evento{
 		if (dia < 1)
 			throw new IllegalArgumentException("O dia informado é inválido por ser menor do que 01.");
 		
-		if (mes < 0 || mes > 11)
+		if (mes < Calendar.JANUARY || mes > Calendar.DECEMBER)
 			throw new IllegalArgumentException("O mês informado é inválido por ser maior do que 12 ou menor do que 01.");
 		
 		if (ano < 1970)
