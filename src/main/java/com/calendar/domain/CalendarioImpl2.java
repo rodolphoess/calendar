@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -65,8 +66,13 @@ public class CalendarioImpl2 implements Calendario {
 
 	@Override
 	public Set<Evento> getEventos() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Evento> eventosGerais = new HashSet<Evento>();
+		
+		for (Evento evento : eventos) {
+			eventosGerais.add(evento);
+		}
+		
+		return eventosGerais;
 	}
 
 	@Override
