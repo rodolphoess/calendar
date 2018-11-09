@@ -62,8 +62,8 @@ public class Evento{
 	private static void validarData(Date data) {
 		Calendar calendar = instanciaCalendar(data);
 		
-		int dia = CalendarUtils.getDiaByData(data);
-		int mes = CalendarUtils.getMesByData(data);
+		int dia = calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+		int mes = calendar.get(Calendar.MONTH);
 		int ano = calendar.get(Calendar.YEAR);
 		
 		if (dia < 1)

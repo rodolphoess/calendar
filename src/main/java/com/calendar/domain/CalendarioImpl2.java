@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.calendar.utils.CalendarUtils;
+import com.calendar.utils.JSONProcessor;
 import com.calendar.utils.JsonException;
 
 public class CalendarioImpl2 implements Calendario {
@@ -29,36 +31,38 @@ public class CalendarioImpl2 implements Calendario {
 	}
 
 	public static void validaMes(int mes) {
-		if (mes > Calendar.DECEMBER) {
+		if (mes > Calendar.DECEMBER)
 			throw new IllegalArgumentException("O mes informado é maior do que Dezembro.");
-		}
-
-		if (mes < Calendar.JANUARY) {
+		
+		if (mes < Calendar.JANUARY)
 			throw new IllegalArgumentException("O mês informado é menor do que Janeiro.");
-		}
 	}
 
 	public static void validaAno(int ano) {
-		if (ano < 1970) {
+		if (ano < 1970) 
 			throw new IllegalArgumentException("O ano informado é menor do que 1970.");
-		}
 	}
 
 	@Override
 	public void adicionarEvento(String titulo, Date dataEvento, String link) {
+		if (!CalendarUtils.dataPertenceAoMes(dataEvento, mes, ano))
+			throw new IllegalArgumentException("A data informada não é válida.");
+		
 		Evento evento = Evento.criarEvento(titulo, dataEvento, link);
-
+		
 		eventos.add(evento);
 	}
 
 	@Override
 	public List<Evento> getEventosByDia(Date diaEvento) {
+		if (!CalendarUtils.dataPertenceAoMes(diaEvento, mes, ano))
+			throw new IllegalArgumentException("A data informada não é válida.");
+		
 		List<Evento> eventosDoDia = new ArrayList<Evento>();
 
 		for (Evento evento : eventos) {
-			if (diaEvento == eventos.iterator().next().getData()) {
+			if (diaEvento == eventos.iterator().next().getData())
 				eventosDoDia.add(evento);
-			}
 		}
 
 		return eventosDoDia;
@@ -68,29 +72,25 @@ public class CalendarioImpl2 implements Calendario {
 	public Set<Evento> getEventos() {
 		Set<Evento> eventosGerais = new HashSet<Evento>();
 		
-		for (Evento evento : eventos) {
+		for (Evento evento : eventos)
 			eventosGerais.add(evento);
-		}
 		
 		return eventosGerais;
 	}
 
 	@Override
 	public int getMes() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mes;
 	}
 
 	@Override
 	public int getAno() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ano;
 	}
 
 	@Override
 	public String getJson() throws JsonException {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONProcessor.toJSON(this);
 	}
 
 }

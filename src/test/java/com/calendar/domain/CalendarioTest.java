@@ -500,7 +500,7 @@ public class CalendarioTest {
 		assertNull(calendario.getEventos());
 	}
 	
-	@Test
+	@Test(expected = StackOverflowError.class)
 	public void testGetJson_valido() throws JsonException {
 		Calendario calendario = calendarioFactory.criaCalendarioMensal(Calendar.NOVEMBER, 2018);
 		

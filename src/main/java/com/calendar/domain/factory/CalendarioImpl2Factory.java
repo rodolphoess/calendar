@@ -1,7 +1,6 @@
 package com.calendar.domain.factory;
 
 import com.calendar.domain.Calendario;
-import com.calendar.domain.CalendarioImpl;
 import com.calendar.domain.CalendarioImpl2;
 
 public class CalendarioImpl2Factory implements CalendarioFactory {
